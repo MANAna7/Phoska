@@ -18,7 +18,16 @@ version = mod_version
 group = mod_group_id
 
 repositories {
-    // Add here additional repositories if required by some of the dependencies below.
+    maven {
+        name = "Curios"
+        url = uri("https://maven.theillusivec4.top/")
+    }
+    maven {
+        url = 'https://maven.twelveiterations.com/repository/maven-public/'
+        content {
+            includeGroup 'net.blay09.mods'
+        }
+    }
 }
 
 base {
@@ -133,6 +142,16 @@ dependencies {
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+
+    // Curios API（コンパイル時はAPIのみ、実行時はフル）
+    compileOnly "top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1:api"
+    runtimeOnly "top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1"
+    // Balm
+    compileOnly("net.blay09.mods:balm-neoforge:${balm_version}")
+    localRuntime("net.blay09.mods:balm-neoforge:${balm_version}")
+    // Waystones
+    compileOnly("net.blay09.mods:waystones-neoforge:${waystones_version}")
+    localRuntime("net.blay09.mods:waystones-neoforge:${waystones_version}")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
