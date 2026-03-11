@@ -1,12 +1,16 @@
 package com.hatsukaze.phoska;
 
 import com.hatsukaze.phoska.register.ModAccessoriesRegister;
+import com.hatsukaze.phoska.register.ModNetworkRegister;
+import com.hatsukaze.phoska.register.ModParticleRegister;
 import com.mojang.logging.LogUtils;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
+
+import java.beans.EventHandler;
 
 
 @SuppressWarnings("SpellCheckingInspection")
@@ -17,7 +21,9 @@ public class Phoska {
 
     public Phoska(IEventBus modEventBus, ModContainer modContainer) {
         ModAccessoriesRegister.ITEMS.register(modEventBus);
+        ModParticleRegister.PARTICLES.register(modEventBus);
+        ModNetworkRegister.register(modEventBus);
 
-//        NeoForge.EVENT_BUS.register(this);
+//        modEventBus.addListener(PhoskaClientHandler::registerParticles);
     }
 }

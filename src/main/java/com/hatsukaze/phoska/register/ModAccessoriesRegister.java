@@ -13,7 +13,7 @@ public class ModAccessoriesRegister {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(Registries.ITEM, Phoska.MODID);
 
-    public static final Supplier<Item> RETURN_NECKLACE =
+    public static final Supplier<Item> NECKLACE_OF_RETURN =
             register("necklace_of_returning", NecklaceOfReturning::new);
 
     //Supplier　ファクトリークラス
