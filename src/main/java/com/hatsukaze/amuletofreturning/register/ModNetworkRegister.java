@@ -1,13 +1,10 @@
 package com.hatsukaze.amuletofreturning.register;
 
-
 import com.hatsukaze.amuletofreturning.AmuletOfReturningMain;
-import com.hatsukaze.amuletofreturning.network.ModClientPayloadHandler;
 import com.hatsukaze.amuletofreturning.network.AmuletOfReturningActivatedPayload;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 public class ModNetworkRegister {
@@ -20,7 +17,12 @@ public class ModNetworkRegister {
         registrar.playToClient(
                 AmuletOfReturningActivatedPayload.TYPE,
                 AmuletOfReturningActivatedPayload.STREAM_CODEC,
-                ModClientPayloadHandler::handle
+                (payload, context) -> {
+                    // ラムダ内で完全修飾名を使うことで、サーバー側でクラスロードされない
+                    context.enqueueWork(() ->
+                            com.hatsukaze.amuletofreturning.network.ModClientPayloadHandler.handle(payload, context)
+                    );
+                }
         );
     }
 }

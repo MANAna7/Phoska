@@ -102,6 +102,12 @@ public class UseAmuletOfReturning {
         player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 400, 1));
         player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 3));
 
+        // 経験値ペナルティ（75%ロスト）
+        int totalXp = player.totalExperience;
+        player.setExperiencePoints(0);
+        player.setExperienceLevels(0);
+        player.giveExperiencePoints(totalXp / 4);
+
         // テレポート系処理が終了後、位置を取得
         pos = player.position();
         player.level().playSound(null, pos.x, pos.y, pos.z, SoundEvents.TOTEM_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
